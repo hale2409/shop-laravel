@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Auth;
 class AdminController extends Controller
 {
     public function index() {
-        dd(bcrypt('123456'));
         return view('admin.layout.index');
     }
 
