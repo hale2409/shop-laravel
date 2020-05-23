@@ -23,11 +23,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="sale_price">Giá sale (*):</label>
-                                <input type="text" class="form-control" name="sale_price" placeholder="Nhập giá sale" value="">
+                                <input type="text" class="form-control" name="sale_price" placeholder="Nhập giá sale" value="0">
                             </div>
                             <div class="form-group">
                                 <label for="tags">Nhập tag cho sản phẩm:</label>
-                                <select class="form-control tag_select2_choose" multiple="multiple">
+                                <select class="form-control tag_select2_choose" name="tags[]" multiple="multiple">
                                 </select>
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="content">Nhập nội dung:</label>
-                                <textarea name="content" class="form-control tinymce_editor_init" rows="10"></textarea>
+                                <textarea name="contents" class="form-control tinymce_editor_init" rows="10"></textarea>
                             </div>
                         </div>
                     </div>

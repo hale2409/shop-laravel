@@ -4,8 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Tag extends Model
+class Slider extends Model
 {
-    protected $table = 'tags';
+    protected $table = 'sliders';
     protected $guarded = [];
 }

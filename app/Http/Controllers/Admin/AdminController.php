@@ -13,7 +13,7 @@ class AdminController extends Controller
     }
 
     // chua xu ly dc
-    public function loginAdmin() {
+    public function getLogin() {
         if (Auth::check()) {
             // nếu đăng nhập thàng công thì
             return redirect()->route('admin.index');
@@ -21,18 +21,19 @@ class AdminController extends Controller
             return view('admin.layout.login');
         }
     }
-    public function postLoginAdmin(Request $request) {
+    public function postLogin(Request $request) {
         $remember = $request->has('remember_me') ? true : false;
         if (Auth::attempt([
             'email'=>$request->email,
             'password'=>$request->password
         ], $remember)){
-            dd($request->all());
             return redirect()->route('admin.index');
-        };
+        } else {
+            return view('admin.layout.login');
+        }
     }
-    public function logoutAdmin() {
+    public function getLogout() {
         Auth::logout();
-        return redirect()->route('admin.login');
+        return redirect()->route('login');
     }
 }

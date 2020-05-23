@@ -1,5 +1,12 @@
 @extends('layouts.admin')
 @section('title', 'Admin | Sản phẩm')
+@section('css')
+    <link rel="stylesheet" href="{{asset('admins/product/index/index.css')}}">
+@endsection
+@section('js')
+    <script src="{{asset('vendors/sweetAlert2/sweetalert2@9.js')}}"></script>
+    <script src="{{asset('admins/product/index/index.js')}}"></script>
+@endsection
 @section('content')
 
     <div class="content-wrapper">
@@ -22,25 +29,30 @@
                             </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th>1</th>
-                                    <td>
-                                        <ul style="list-style: none">
-                                            <li>Ten: Iphone 4</li>
-                                            <li>Gia: 50000 VND</li>
-                                            <li>Sale: 3 %</li>
-                                        </ul>
-                                    </td>
-                                    <td>Dien thoai</td>
-                                    <td>
-                                        <a href="" class="btn btn-default">Edit</a>
-                                        <a href="" class="btn btn-danger">Delete</a>
-                                    </td>
-                                </tr>
+                                @foreach ($products as $key=>$productItem)
+                                    <tr>
+                                        <th>{{$key + 1}}</th>
+                                        <td>
+                                            <ul style="list-style: none">
+                                                <li><i>Ten:</i> {{$productItem->name}}</li>
+                                                <li><i>Gia:</i> {{number_format($productItem->price, 0, ',', '.')}} <b>VND</b></li>
+                                                <li><i>Sale:</i> {{$productItem->sale_price}} <b>%</b></li>
+                                            </ul>
+                                        </td>
+                                        <td>
+                                            <img class="product_image_150_100" src="{{$productItem->feature_image_path}}" alt="">
+                                        </td>
+                                        <td>{{optional($productItem->category)->name}}</td>
+                                        <td>
+                                            <a href="{{route('product.edit',['id'=>$productItem->id])}}" class="btn btn-default">Edit</a>
+                                            <a href="" data-url="{{route('product.delete',['id'=>$productItem->id])}}" class="btn btn-danger action_delete">Delete</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
-                    <div class="col-md-12"></div>
+                    <div class="col-md-12">{{$products->links()}}</div>
                 </div>
             </div>
         </div>

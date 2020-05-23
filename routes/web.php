@@ -3,11 +3,11 @@
 use Illuminate\Support\Facades\Route;
 
 
-//Route::get('admin/login', 'Admin\AdminController@loginAdmin')->name('admin.login');
-//Route::post('admin/login', 'Admin\AdminController@postLoginAdmin');
-//Route::get('admin/logout', 'Admin\AdminController@logoutAdmin')->name('admin.logout');
+Route::get('admin/login', 'Admin\AdminController@getLogin')->name('login');
+Route::post('admin/login', 'Admin\AdminController@postLogin');
+Route::get('admin/logout', 'Admin\AdminController@getLogout')->name('admin.logout');
 
-Route::group(['prefix' => 'admin', 'namespace'=>'Admin'], function (){
+Route::group(['prefix' => 'admin', 'namespace'=>'Admin', 'middleware'=>'auth'], function (){
     Route::get('/', 'AdminController@index')->name('admin.index');
 
     Route::prefix('categories')->group(function () {
@@ -35,6 +35,24 @@ Route::group(['prefix' => 'admin', 'namespace'=>'Admin'], function (){
         Route::get('/edit/{id}', 'AdminProductController@edit')->name('product.edit');
         Route::post('/update/{id}', 'AdminProductController@update')->name('product.update');
         Route::get('/delete/{id}', 'AdminProductController@delete')->name('product.delete');
+    });
+
+    Route::prefix('slider')->group(function () {
+        Route::get('/', 'AdminSliderController@index')->name('slider.index');
+        Route::get('/create', 'AdminSliderController@create')->name('slider.create');
+        Route::post('/store', 'AdminSliderController@store')->name('slider.store');
+        Route::get('/edit/{id}', 'AdminSliderController@edit')->name('slider.edit');
+        Route::post('/update/{id}', 'AdminSliderController@update')->name('slider.update');
+        Route::get('/delete/{id}', 'AdminSliderController@delete')->name('slider.delete');
+    });
+
+    Route::prefix('setting')->group(function () {
+        Route::get('/', 'AdminSliderController@index')->name('setting.index');
+        Route::get('/create', 'AdminSliderController@create')->name('setting.create');
+        Route::post('/store', 'AdminSliderController@store')->name('setting.store');
+        Route::get('/edit/{id}', 'AdminSliderController@edit')->name('setting.edit');
+        Route::post('/update/{id}', 'AdminSliderController@update')->name('setting.update');
+        Route::get('/delete/{id}', 'AdminSliderController@delete')->name('setting.delete');
     });
 });
 
